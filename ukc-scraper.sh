@@ -1,21 +1,18 @@
 #! /bin/bash
 
-url="https://www.ukclimbing.com/logbook/crags/old_man_of_hoy-281/east_face_route_original_route-"
+url="https://www.ukclimbing.com/logbook/crags/crag-1/route-"
+request_delay=0
 
-# for ((n=0;n<1000;n++))
-for ((n=315430;n<689000;n++))
+# Headers
+echo "url, output (match)"
+
+for ((n=480620;n<6890000;n++))
 do
-    output=$(wget -qO- "$url$n" | grep -iE "Dan Varian|John Hunt") 
-    length=${#output}
-    if [ $length -gt 0 ]
+    output=$(wget -qO- "$url$n" | grep -iE "Dan Varian|dan varian|d varian|dan v|D. Varian.|D Varian|Dan V|Dan v|dan V|dan v")
+    match=${#output}
+    if [ $match -gt 0 ]
     then
-        echo FOUND. $url$n
+        echo $url$n, $match
     fi
-    sleep 0.1
-    # echo $n
+    sleep $request_delay
 done
-
-
-str="this is a string"
-n=${#str}
-echo "Length of the string is : $n "
